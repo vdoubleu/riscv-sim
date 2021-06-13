@@ -108,7 +108,7 @@ std::string assembler::assembleS(std::unique_ptr<command> c) {
   std::string imm = getImmInBits(c->field3);
 
   std::string imm115 = imm.substr(0, 7);
-  std::string imm40 = imm.substr(8, 5);
+  std::string imm40 = imm.substr(7, 5);
 
   std::string sCode = "0100011";
 
