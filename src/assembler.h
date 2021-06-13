@@ -15,6 +15,7 @@ class assembler {
   std::array<bool, 32> assemble(std::unique_ptr<command> c);
   std::array<bool, 32> bitStringToBitArr(std::string bitString);
   std::string bitArrToBitString(std::array<bool, 32> bitArr);
+  std::string bitArrToBitString(std::vector<bool> bitVec);
 
   private:
   std::string assembleR(std::unique_ptr<command> c);

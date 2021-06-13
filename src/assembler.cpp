@@ -44,9 +44,15 @@ std::array<bool, 32> assembler::bitStringToBitArr(std::string bitString) {
 }
 
 std::string assembler::bitArrToBitString(std::array<bool, 32> bitArr) {
+  std::vector<bool> bitVec(bitArr.begin(), bitArr.end());
+
+  return assembler::bitArrToBitString(bitVec);
+}
+
+std::string assembler::bitArrToBitString(std::vector<bool> bitVec) {
   std::string bitStr = "";
 
-  for (bool b : bitArr)
+  for (bool b : bitVec)
     bitStr += b ? "1" : "0";
 
   return bitStr;
@@ -57,7 +63,7 @@ std::string assembler::assembleR(std::unique_ptr<command> c) {
   std::string rs1 = getRegisterInBits(c->field2);
   std::string rs2 = getRegisterInBits(c->field3);
 
-  std::string rCode = "0110011";
+  std::string rCode = machineTypeMapping.at(R);
 
   if (machineIdMapping.find(c->name) == machineIdMapping.end()) {
     throw unexpectedCommandType();
@@ -72,7 +78,7 @@ std::string assembler::assembleI(std::unique_ptr<command> c) {
   std::string rs1 = getRegisterInBits(c->field2);
   std::string imm = getImmInBits(c->field3);
 
-  std::string iCode = c->name == JALR ? "1100111" : "0010011";
+  std::string iCode = c->name == JALR ? JALRMachineTypeMapping : machineTypeMapping.at(I);
 
   if (machineIdMapping.find(c->name) == machineIdMapping.end()) {
     throw unexpectedCommandType();
@@ -93,7 +99,7 @@ std::string assembler::assembleB(std::unique_ptr<command> c) {
   std::string imm105 = imm.substr(2, 6);
   std::string imm41 = imm.substr(8, 4);
 
-  std::string bCode = "1100011";
+  std::string bCode = machineTypeMapping.at(B);
 
   if (machineIdMapping.find(c->name) == machineIdMapping.end()) {
     throw unexpectedCommandType();
@@ -110,7 +116,7 @@ std::string assembler::assembleS(std::unique_ptr<command> c) {
   std::string imm115 = imm.substr(0, 7);
   std::string imm40 = imm.substr(7, 5);
 
-  std::string sCode = "0100011";
+  std::string sCode = machineTypeMapping.at(S);
 
    if (machineIdMapping.find(c->name) == machineIdMapping.end()) {
     throw unexpectedCommandType();

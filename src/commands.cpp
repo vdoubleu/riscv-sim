@@ -57,6 +57,16 @@ static const std::unordered_map<std::string, std::pair<commandType, commandName>
     {"SW", {S, SW}}
   };
 
+static const std::unordered_map<commandType, std::string> machineTypeMapping 
+  {
+    {R, "0110011"},
+    {I, "0010011"},
+    {B, "1100011"},
+    {S, "0100011"}
+  };
+
+static const std::string JALRMachineTypeMapping = "1100111";
+
 static const std::unordered_map<commandName, std::vector<std::string>> machineIdMapping 
   {
     {ADD, {"0000000", "000"}},
