@@ -7,15 +7,15 @@
 #include <bitset>
 #include <iostream>
 #include "errors.cpp"
+#include "util.h"
 
 class command;
 
 class assembler {
+  util u;
+
   public:
   std::array<bool, 32> assemble(std::unique_ptr<command> c);
-  std::array<bool, 32> bitStringToBitArr(std::string bitString);
-  std::string bitArrToBitString(std::array<bool, 32> bitArr);
-  std::string bitArrToBitString(std::vector<bool> bitVec);
 
   private:
   std::string assembleR(std::unique_ptr<command> c);

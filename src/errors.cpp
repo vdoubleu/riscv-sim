@@ -10,4 +10,6 @@ class unrecognisedImm : unrecognisedValue{};
 class unrecognisedReg : unrecognisedValue{};
 
 class invalidBranchImmediate{};
+
+class unrecognisedOpCode{};
 #endif

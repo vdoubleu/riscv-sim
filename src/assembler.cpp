@@ -7,6 +7,7 @@
 #include "commands.cpp"
 #include "errors.cpp"
 #include "assembler.h"
+#include "util.h"
 
 std::array<bool, 32> assembler::assemble(std::unique_ptr<command> c) {
   std::string outputBitString = "";
@@ -30,32 +31,7 @@ std::array<bool, 32> assembler::assemble(std::unique_ptr<command> c) {
       throw unexpectedCommandType();
   }
 
-  return bitStringToBitArr(outputBitString);
-}
-
-std::array<bool, 32> assembler::bitStringToBitArr(std::string bitString) {
-  std::array<bool, 32> bitArr;
-
-  for (size_t pos = 0; pos < bitString.length(); ++pos) {
-    bitArr[pos] = (bitString.at(pos) == '1');
-  }
-
-  return bitArr;
-}
-
-std::string assembler::bitArrToBitString(std::array<bool, 32> bitArr) {
-  std::vector<bool> bitVec(bitArr.begin(), bitArr.end());
-
-  return assembler::bitArrToBitString(bitVec);
-}
-
-std::string assembler::bitArrToBitString(std::vector<bool> bitVec) {
-  std::string bitStr = "";
-
-  for (bool b : bitVec)
-    bitStr += b ? "1" : "0";
-
-  return bitStr;
+  return u.bitStringToBitArr(outputBitString);
 }
 
 std::string assembler::assembleR(std::unique_ptr<command> c) {

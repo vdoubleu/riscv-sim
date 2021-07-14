@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -Wall -MMD -g
 TESTFLAGS = -lboost_unit_test_framework
-EXEC = assembler
+EXEC = sim
 TESTEXEC = test
 SRCDIR = src
 OBJDIR = obj
